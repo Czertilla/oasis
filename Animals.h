@@ -43,6 +43,8 @@ public:
     explicit Animals(const Vectors& pos);
     Animals(Animals* father, Animals* mother);
 
+    static const std::set<Animals *> &getPopulation();
+
     Vectors getPosition();
     static float creategen(float fatherGen, float motherGen);
     [[nodiscard]] double getAge() const;
@@ -53,9 +55,11 @@ public:
     float getStamina();
     float getHealth();
     float getSatiety();
+    void setVelocity(const Vectors &vect);
     [[nodiscard]] float getVigilance() const;
     [[nodiscard]] float getMetabolism() const;
     bool isFemal() const;
+
 
     void update();
 

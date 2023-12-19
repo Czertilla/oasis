@@ -19,4 +19,13 @@ void Predators::death() {
     population.erase(this);
 }
 
+void Predators::update() {
+    Animals::update();
+    if (this->getSatiety() < HUNGRY_LEVEL_Predators){
+//        find
+    }else{
+
+    }
+}
+
 

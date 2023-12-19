@@ -91,7 +91,7 @@ void Animals::update(){
     age += timeGap;
     auto gapVect = velocity.getMultiplied(timeGap);
     position.add(gapVect);
-    stamina -= (float) (gapVect.length() * velocity.length()) / endurance;
+    stamina -= STAMINA_LOST_SPEED * (float) (gapVect.length() * velocity.length()) / endurance;
     if (health < MIN_HEALTH_LEVEL){
         death();
         return;
@@ -101,7 +101,6 @@ void Animals::update(){
         health += metabolism * (float) timeGap;
     }
     if (stamina < MIN_STAMINA_LEVEL) velocity = Vectors(0, 0);
-
 //    health += effects.count("healing")  * (old - age) / age ;
 //    if (health < 100.0 and effects.count("healing") == 0){
 //        effects["healing"] = -1;
@@ -131,5 +130,13 @@ float Animals::getRep() const {
 
 float Animals::getVigilance() const {
     return vigilance;
+}
+
+void Animals::setVelocity(const Vectors &vect) {
+    Animals::velocity = vect;
+}
+
+const std::set<Animals *> &Animals::getPopulation() {
+    return population;
 }
 
