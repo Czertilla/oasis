@@ -34,7 +34,7 @@ timer::timer() {
         initialized = true;
         timelineSpeed = 1.0;
         realTime = getTime();
-        time = (double) realTime / 1000;
+        time = 0.0;
     }
 }
 

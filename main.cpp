@@ -19,6 +19,6 @@ int main() {
     timer::setTimelineSpeed(100);
     sleep(5000);
     auto second = timer::get();
-    std::cout << timer::getGap(past, second) << std::endl << timer::getGap(now, second);
+    std::cout << timer::getGap(past, second) << std::endl << second;
     return 0;
 }
