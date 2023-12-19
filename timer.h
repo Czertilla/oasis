@@ -9,21 +9,23 @@
 #define OASIS_TIMER_H 1
 namespace sc = std::chrono;
 
+class timer {
+private:
+    static bool initialized;
+    static double time;
+    static long long realTime;
+public:
+    static void setTimelineSpeed(double timelineSpeed);
 
-static long long getTime() {
-    auto time = sc::system_clock::now(); // get the current time
-
-    auto since_epoch = time.time_since_epoch(); // get the duration since epoch
-
-// I don't know what system_clock returns
-// I think it's uint64_t nanoseconds since epoch
-// Either way this duration_cast will do the right thing
-    auto millis = sc::duration_cast<sc::milliseconds>(since_epoch);
-    return millis.count();
+private:
+    static double timelineSpeed;
+public:
+    timer();
+    static long long getTime();
+    static double getGap(long long a, long long b);
+    static double getGap(double a, double b);
+    static double get();
 };
 
-static double getGap(long long a, long long b){
-    return (double) (b - a) / 1000 * timeLineSpeed;
-}
 #endif //OASIS_TIMER_H
 

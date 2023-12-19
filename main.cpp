@@ -10,14 +10,15 @@ void sleep(long long ms){
 }
 
 int main() {
+    timer();
     auto a = Predators(Vectors(1, 2));
-    auto now = getTime();
+    auto now = timer::get();
     sleep(5000);
-    auto past = getTime();
-    std::cout << getGap(now, past) << std::endl;
-    timeLineSpeed = 100;
+    auto past = timer::get();
+    std::cout << timer::getGap(now, past) << std::endl;
+    timer::setTimelineSpeed(100);
     sleep(5000);
-    now = getTime();
-    std::cout << getGap(past, now) << std::endl;
+    auto second = timer::get();
+    std::cout << timer::getGap(past, second) << std::endl << timer::getGap(now, second);
     return 0;
 }

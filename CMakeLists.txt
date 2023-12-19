@@ -11,4 +11,5 @@ add_executable(oasis main.cpp
         timer.h
         Animals.cpp
         Predators.h
-        Predators.cpp)
+        Predators.cpp
+        timer.cpp)

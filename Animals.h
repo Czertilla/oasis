@@ -18,25 +18,27 @@
 
 class Animals {
 private:
-    float OLD_AGE = OLD_AGE_Animals;
-    float REP_AGE = REP_AGE_Animals;
+    double OLD_AGE = OLD_AGE_Animals;
+    double REP_AGE = REP_AGE_Animals;
     constexpr const static float MIN_GEN = MIN_GEN_Animals;
     constexpr const static float MAX_GEN = MAX_GEN_Animals;
     static std::set<Animals*> population;
     std::map<std::string, float> effects;
     Vectors position;
     Vectors velocity;
-    long long lastUpdate;
-    float age;
-    float old;
-    float rep;
+    double lastUpdate;
+    double age;
+    double old;
+    double rep;
     float mobility;
     float endurance;
     float stamina;
+    float vigilance;
     float health;
     float satiety;
     float metabolism;
     bool femal;
+    bool dead;
 public:
     explicit Animals(const Vectors& pos);
     Animals(Animals* father, Animals* mother);
@@ -51,6 +53,7 @@ public:
     float getStamina();
     float getHealth();
     float getSatiety();
+    [[nodiscard]] float getVigilance() const;
     [[nodiscard]] float getMetabolism() const;
     bool isFemal();
 
