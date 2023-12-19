@@ -53,7 +53,7 @@ Vectors Animals::getPosition()  {
     return position;
 }
 
-float Animals::getAge() const  {
+double Animals::getAge() const  {
     return age;
 }
 
@@ -81,7 +81,7 @@ float Animals::getMetabolism() const{
     return metabolism;
 }
 
-bool Animals::isFemal() {
+bool Animals::isFemal() const {
     return femal;
 }
 
@@ -92,23 +92,23 @@ void Animals::update(){
     auto gapVect = velocity.getMultiplied(timeGap);
     position.add(gapVect);
     stamina -= (float) (gapVect.length() * velocity.length()) / endurance;
-    if (health < 3.1){
+    if (health < MIN_HEALTH_LEVEL){
         death();
         return;
     }
-    if (health < 99.0) {
-        metabolism += 0.3;
+    if (health < MAX_HEALTH_LEVEL) {
+        metabolism += MB_HEALING_COST;
         health += metabolism * (float) timeGap;
     }
-    if (stamina < 3.1) velocity = Vectors(0, 0);
+    if (stamina < MIN_STAMINA_LEVEL) velocity = Vectors(0, 0);
 
 //    health += effects.count("healing")  * (old - age) / age ;
 //    if (health < 100.0 and effects.count("healing") == 0){
 //        effects["healing"] = -1;
 //        metabolism += 0.5;
 //    }
-    if (stamina < 99.0){
-        metabolism += 0.1;
+    if (stamina < MAX_STAMINA_LEVEL){
+        metabolism += MB_RECUPERATION_COST;
         stamina += metabolism * (float) timeGap;
     }
     lastUpdate = currUpdate;
@@ -118,6 +118,7 @@ void Animals::death(){
     health = 0.0;
     population.erase(this);
     dead = true;
+    delete this;
 }
 
 float Animals::getOld() const {

@@ -45,7 +45,7 @@ public:
 
     Vectors getPosition();
     static float creategen(float fatherGen, float motherGen);
-    [[nodiscard]] float getAge() const;
+    [[nodiscard]] double getAge() const;
     [[nodiscard]] float getMobility() const;
     [[nodiscard]] float getEndurance() const;
     [[nodiscard]] float getOld() const;
@@ -55,7 +55,7 @@ public:
     float getSatiety();
     [[nodiscard]] float getVigilance() const;
     [[nodiscard]] float getMetabolism() const;
-    bool isFemal();
+    bool isFemal() const;
 
     void update();
 

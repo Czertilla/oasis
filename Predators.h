@@ -13,7 +13,7 @@ private:
 public:
     explicit Predators(const Vectors& position);
     Predators(Animals* father, Animals* mother);
-
+    double a();
     void death() override;
 };
 

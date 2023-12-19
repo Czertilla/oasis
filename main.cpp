@@ -1,9 +1,7 @@
 #include <iostream>
-#include "Predators.h"
+#include "Herbivores.h"
 #include <thread>
 #include "timer.h"
-#include "constants.h"
-
 
 void sleep(long long ms){
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));

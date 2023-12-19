@@ -10,7 +10,7 @@ Predators::Predators(Animals* father, Animals* mother): Animals(father, mother) 
     population.insert(this);
 }
 
-Predators::Predators(const Vectors& position) : Animals(position) {
+Predators::Predators(const Vectors  &position) : Animals(position) {
     population.insert(this);
 }
 
