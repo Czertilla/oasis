@@ -4,6 +4,7 @@
 
 #ifndef OASIS_PREDATORS_H
 #define OASIS_PREDATORS_H
+
 #include "Animals.h"
 
 class Predators: public Animals {
@@ -15,6 +16,5 @@ public:
 
     void death() override;
 };
-
 
 #endif //OASIS_PREDATORS_H

@@ -6,8 +6,6 @@
 #ifndef OASIS_ANIMALS_H
 #define OASIS_ANIMALS_H
 
-
-//#include <windows.h>
 #include <string>
 #include <vector>
 #include "Vectors.h"
@@ -15,24 +13,20 @@
 #include <ctime>
 #include <string>
 #include <map>
+#include "timer.h"
+
 
 class Animals {
 private:
-    float OLD_AGE = 20;
-    float REP_AGE = 1;
-public:
-    float getOld() const;
-
-    float getRep() const;
-
-private:
-    constexpr static float MIN_GEN = 0.8;
-    constexpr static float MAX_GEN = 2.7;
-    std::set<Animals*> population;
+    float OLD_AGE = OLD_AGE_Animals;
+    float REP_AGE = REP_AGE_Animals;
+    constexpr const static float MIN_GEN = MIN_GEN_Animals;
+    constexpr const static float MAX_GEN = MAX_GEN_Animals;
+    static std::set<Animals*> population;
     std::map<std::string, float> effects;
     Vectors position;
     Vectors velocity;
-    double lastUpdate;
+    long long lastUpdate;
     float age;
     float old;
     float rep;
@@ -52,6 +46,8 @@ public:
     [[nodiscard]] float getAge() const;
     [[nodiscard]] float getMobility() const;
     [[nodiscard]] float getEndurance() const;
+    [[nodiscard]] float getOld() const;
+    [[nodiscard]] float getRep() const;
     float getStamina();
     float getHealth();
     float getSatiety();

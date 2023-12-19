@@ -6,7 +6,10 @@
 #include "Randomizer.h"
 #include <vector>
 
+std::set<Animals*> Animals::population{};
+
 Animals::Animals(const Vectors& pos) {
+    lastUpdate = getTime();
     population.insert(this);
     position = pos;
     age = 0.0;
@@ -22,6 +25,7 @@ Animals::Animals(const Vectors& pos) {
 }
 
 Animals::Animals(Animals* father, Animals* mother) {
+    lastUpdate = getTime();
     population.insert(this);
     position = mother->getPosition();
     age = 0.0;
@@ -78,7 +82,7 @@ bool Animals::isFemal() {
 }
 
 void Animals::update(){
-    long long now = time(nullptr);
+    long long timeUpdate = getTime();
     health += (float) effects.count("healing")  * (old - age) / age ;
     if (health < 100.0 and effects.count("healing") == 0){
         effects["healing"] = -1;

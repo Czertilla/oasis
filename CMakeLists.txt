@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(oasis main.cpp
         Vectors.cpp
         Vectors.h
-        Animals.h
+        Randomizer.cpp
+        constants.h
+        timer.h
         Animals.cpp
-        Predators.cpp
-        Randomizer.cpp)
+        Predators.h
+        Predators.cpp)

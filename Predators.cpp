@@ -4,6 +4,8 @@
 
 #include "Predators.h"
 
+std::set<Predators*> Predators::population{};
+
 Predators::Predators(Animals* father, Animals* mother): Animals(father, mother) {
     population.insert(this);
 }
