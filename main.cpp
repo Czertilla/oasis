@@ -9,8 +9,6 @@ void sleep(long long ms){
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 }
 
-
-//it's the main file
 int main() {
     timer();
     auto a = Predators(Vectors(1, 2));
