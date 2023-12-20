@@ -49,7 +49,7 @@ public:
     static float creategen(float fatherGen, float motherGen);
 
 //    далее идет ряд геттеров для приватных полей класса и объекта
-    static std::set<Animals *> &getPopulation();
+    static std::set<Animals *>* getPopulation();
     Vectors getPosition();
     [[nodiscard]] double getAge() const;
     [[nodiscard]] float getMobility() const;

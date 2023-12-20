@@ -15,7 +15,7 @@ public:
     explicit Predators(const Vectors& position); // наследованные кострукторы
     Predators(Animals* father, Animals* mother);
     // уникальный для класса геттер
-    static std::set<Predators *> &getPopulation();
+    static std::set<Predators *>* getPopulation();
 
     // наследованный метод обновления
     void update() override;

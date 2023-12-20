@@ -24,7 +24,7 @@ void Predators::update() {
     Animals::update();
     auto pos = getPosition().getMultiplied(-1);
     if (this->getSatiety() < HUNGRY_LEVEL_Predators){
-        for(Herbivores* herb : Herbivores::getPopulation()){
+        for(Herbivores* herb : *Herbivores::getPopulation()){
             auto distance = Vectors::getAmount(herb->getPosition(), pos);
             auto range = distance.length();
             if (range <= KILL_RANGE){
@@ -44,8 +44,8 @@ void Predators::update() {
     }
 }
 
-std::set<Predators *>& Predators::getPopulation() {
-    return population;
+std::set<Predators *>* Predators::getPopulation() {
+    return &population;
 }
 
 

@@ -5,6 +5,12 @@
 #ifndef OASIS_CONSTANTS_H
 #define OASIS_CONSTANTS_H 1
 
+const double X_BORDER_World = 340.0;
+const double Y_BORDER_World = 340.0;
+const int X_BORDER_Screen   = 340;
+const int Y_BORDER_Screen   = 340;
+const int DOT_SCREEN_RADIUS = 2;
+
 const float MAX_HEALTH_LEVEL        = 99.0;
 const float MIN_HEALTH_LEVEL        = 3.1;
 const float MAX_STAMINA_LEVEL       = 99.0;
@@ -40,6 +46,7 @@ const double HUNGRY_LEVEL_Herbivores    = HUNGRY_LEVEL_Animals;
 const double VIEW_DISTANCE_Herbivores   = VIEW_DISTANCE_Animals;
 const double WALK_SPEED_Herbivores      = WALK_SPEED_Animals;
 const double RUN_SPEED_Herbivores       = RUN_SPEED_Animals;
+const double GRASS_RECOVERY             = 1.0;
 
 
 #endif //OASIS_CONSTANTS_H

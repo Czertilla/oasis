@@ -110,6 +110,10 @@ void Animals::update(){
         metabolism += MB_RECUPERATION_COST;
         stamina += metabolism * (float) timeGap;
     }
+    if(position.x > X_BORDER_World) position.x = X_BORDER_World;
+    if(position.x < -X_BORDER_World) position.x = - X_BORDER_World;
+    if(position.y > Y_BORDER_World) position.y = Y_BORDER_World;
+    if(position.y < -Y_BORDER_World) position.y = - Y_BORDER_World;
     lastUpdate = currUpdate;
 }
 
@@ -136,8 +140,8 @@ void Animals::setVelocity(const Vectors &vect) {
     Animals::velocity = vect;
 }
 
-std::set<Animals *> &Animals::getPopulation() {
-    return population;
+std::set<Animals *>* Animals::getPopulation() {
+    return &population;
 }
 
 void Animals::eat() {
