@@ -23,6 +23,8 @@ public:
     static double length(const Vectors& vector);
     static double getScalarProduct(const Vectors& a, const Vectors& b);
     [[nodiscard]] double getScalarProduct(const Vectors& other) const;
+    [[nodiscard]] Vectors getDirection() const;
+    static Vectors getDirection(const Vectors& vect);
 };
 
 

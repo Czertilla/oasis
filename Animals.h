@@ -16,37 +16,41 @@
 #include "timer.h"
 
 
+// Базовый класс Животные, для наследования другим подвидам. Описывает общие для всех
+// животных механики поведения и жизнедеятиельности
 class Animals {
 private:
-    double OLD_AGE = OLD_AGE_Animals;
-    double REP_AGE = REP_AGE_Animals;
-    constexpr const static float MIN_GEN = MIN_GEN_Animals;
-    constexpr const static float MAX_GEN = MAX_GEN_Animals;
-    static std::set<Animals*> population;
-    std::map<std::string, float> effects;
-    Vectors position;
-    Vectors velocity;
-    double lastUpdate;
-    double age;
-    double old;
-    double rep;
-    float mobility;
-    float endurance;
-    float stamina;
-    float vigilance;
-    float health;
-    float satiety;
-    float metabolism;
-    bool femal;
-    bool dead;
+    double OLD_AGE = OLD_AGE_Animals; // отметка возраста старости в секунжах
+    double REP_AGE = REP_AGE_Animals; // отметка репродуктивного возраста в секундах
+    constexpr const static float MIN_GEN = MIN_GEN_Animals; // минимальный случайный множител гена
+    constexpr const static float MAX_GEN = MAX_GEN_Animals; // максимальный случайный множитель гена
+    static std::set<Animals*> population; // популяция всех животных
+//    std::map<std::string, float> effects;
+    Vectors position; // позиция
+    Vectors velocity; // скорость (изменение позиции в секунду)
+    double lastUpdate; // время в секундах в мире моделирования, когда последний раз обновлялась инфа об особи
+    double age; // возраст в секундах
+    double old; //ген старого возраста (множитель общего для класса значения)
+    double rep; //ген репродуктивного возраста (тожемножитель)
+    float mobility; //ген мобильности
+    float endurance; //ген выносливости
+    float stamina; //шкала выносливости
+    float vigilance;// ген дальности зрения
+    float health;// шкала здоровья
+    float satiety;// шкала сытости
+    float metabolism;// ген метаболизма
+    bool femal;// является ли особь самкой
+    bool dead;// мертва ли особь
 public:
-    explicit Animals(const Vectors& pos);
-    Animals(Animals* father, Animals* mother);
+    explicit Animals(const Vectors& pos); // конструктор для искуственного рождения (выставление на координаты)
+//    стандартной особи)
+    Animals(Animals* father, Animals* mother); // конструктор для естественного рождения (с механикой генетики)
 
-    static const std::set<Animals *> &getPopulation();
-
-    Vectors getPosition();
     static float creategen(float fatherGen, float motherGen);
+
+//    далее идет ряд геттеров для приватных полей класса и объекта
+    static std::set<Animals *> &getPopulation();
+    Vectors getPosition();
     [[nodiscard]] double getAge() const;
     [[nodiscard]] float getMobility() const;
     [[nodiscard]] float getEndurance() const;
@@ -60,9 +64,12 @@ public:
     [[nodiscard]] float getMetabolism() const;
     bool isFemal() const;
 
+//  обновление информации об особи, происходит каждую итерацию по популяции
+    virtual void update();
 
-    void update();
+    void eat();
 
+//    вызывается при смерти особи
     virtual void death();
 };
 

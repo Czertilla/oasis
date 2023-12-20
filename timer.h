@@ -16,6 +16,7 @@ private:
     static double time;
     static long long realTime;
     static double timelineSpeed;
+    static double mem;
 public:
     timer();
     static long long getTime();
@@ -23,6 +24,11 @@ public:
     static double getGap(double a, double b);
     static double get();
     static void setTimelineSpeed(double timelineSpeed);
+    static void pause();
+
+    static double getTimelineSpeed();
+
+    static void resume();
 };
 
 #endif //OASIS_TIMER_H

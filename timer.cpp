@@ -12,6 +12,7 @@ bool timer::initialized = false;
 double timer::time = 0.0;
 long long timer::realTime = 0;
 double timer::timelineSpeed = 1.0;
+double timer::mem = 0.0;
 
 long long timer::getTime() {
         auto t = sc::system_clock::now(); // get the current time
@@ -54,6 +55,26 @@ double timer::get() {
 
 double timer::getGap(double a, double b) {
     return (b - a);
+}
+
+void timer::pause() {
+    get();
+    if (mem == 0.){
+        mem = timelineSpeed;
+        timelineSpeed = 0;
+    }
+}
+
+void timer::resume() {
+    get();
+    if (mem != 0.){
+        timelineSpeed = mem;
+        mem = 0;
+    }
+}
+
+double timer::getTimelineSpeed() {
+    return timelineSpeed;
 };
 
 

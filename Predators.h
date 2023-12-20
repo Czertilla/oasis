@@ -7,13 +7,20 @@
 
 #include "Animals.h"
 
+// класс Хищники, наследуется от базового класса Животные
 class Predators: public Animals {
 private:
-    static std::set<Predators*> population;
+    static std::set<Predators*> population; // популяция только хищников
 public:
-    explicit Predators(const Vectors& position);
+    explicit Predators(const Vectors& position); // наследованные кострукторы
     Predators(Animals* father, Animals* mother);
+    // уникальный для класса геттер
+    static std::set<Predators *> &getPopulation();
+
+    // наследованный метод обновления
     void update() override;
+
+    // наследованный метод смерти
     void death() override;
 };
 

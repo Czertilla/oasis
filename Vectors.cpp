@@ -64,3 +64,12 @@ double Vectors::getScalarProduct(const Vectors& other) const {
     return Vectors::getScalarProduct(*this, other);
 }
 
+Vectors Vectors::getDirection() const {
+    auto len = 1 / length();
+    return getMultiplied(len);
+}
+
+Vectors Vectors::getDirection(const Vectors &vect) {
+    return vect.getDirection();
+}
+

@@ -117,7 +117,7 @@ void Animals::death(){
     health = 0.0;
     population.erase(this);
     dead = true;
-    delete this;
+    Animals::~Animals();
 }
 
 float Animals::getOld() const {
@@ -136,7 +136,11 @@ void Animals::setVelocity(const Vectors &vect) {
     Animals::velocity = vect;
 }
 
-const std::set<Animals *> &Animals::getPopulation() {
+std::set<Animals *> &Animals::getPopulation() {
     return population;
+}
+
+void Animals::eat() {
+    satiety = 100.0;
 }
 
