@@ -7,6 +7,9 @@ add_executable(
         Predators.cpp
         Randomizer.cpp
         timer.cpp
-        Vectors.cpp)
+        Vectors.cpp
+)
 
+
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 target_link_libraries(testbgi bgi)

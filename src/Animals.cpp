@@ -13,8 +13,8 @@ Animals::Animals(const Vectors& pos) {
     population.insert(this);
     position = pos;
     age = 0.0;
-    old = OLD_AGE;
-    rep = REP_AGE;
+    old = OLD_AGE_Animals;
+    rep = REP_AGE_Animals;
     vigilance = 1.0;
     mobility = 1.0;
     endurance = 1.0;
@@ -22,6 +22,7 @@ Animals::Animals(const Vectors& pos) {
     health = 100.0;
     satiety = 100.0;
     metabolism = 1.0;
+    saturation = SATURATION_Animals;
     femal = true;
     dead = false;
 }
@@ -40,6 +41,7 @@ Animals::Animals(Animals* father, Animals* mother) {
     health = 100.0;
     satiety = 100.0;
     metabolism = creategen(father->getMetabolism(), mother->getMetabolism());
+    saturation = SATURATION_Animals;
     femal = endurance > mobility;
     dead = false;
 }
@@ -89,14 +91,20 @@ void Animals::update(){
     double currUpdate = timer::get();
     double timeGap = timer::getGap(lastUpdate, currUpdate);
     age += timeGap;
+    if(age >= OLD_AGE_Animals * old){
+        this->death();
+        return;
+    }
     auto gapVect = velocity.getMultiplied(timeGap);
     position.add(gapVect);
     stamina -= STAMINA_LOST_SPEED * (float) (gapVect.length() * velocity.length()) / endurance;
     if (health < MIN_HEALTH_LEVEL){
-        death();
+        this->death();
         return;
     }
+    bool hmflag{false}, smflag{false};
     if (health < MAX_HEALTH_LEVEL) {
+        hmflag = true;
         metabolism += MB_HEALING_COST;
         health += metabolism * (float) timeGap;
     }
@@ -107,9 +115,17 @@ void Animals::update(){
 //        metabolism += 0.5;
 //    }
     if (stamina < MAX_STAMINA_LEVEL){
+        smflag = true;
         metabolism += MB_RECUPERATION_COST;
         stamina += metabolism * (float) timeGap;
     }
+    satiety -= (float)this->HUNGER_SPEED * metabolism * (float)timeGap;
+    if(satiety <= 0.0){
+        this->death();
+        return;
+    }
+    if(hmflag) metabolism -= MB_HEALING_COST;
+    if(smflag) metabolism -= MB_RECUPERATION_COST;
     if(position.x > X_BORDER_World) position.x = X_BORDER_World;
     if(position.x < -X_BORDER_World) position.x = - X_BORDER_World;
     if(position.y > Y_BORDER_World) position.y = Y_BORDER_World;
@@ -121,15 +137,14 @@ void Animals::death(){
     health = 0.0;
     population.erase(this);
     dead = true;
-    Animals::~Animals();
 }
 
 float Animals::getOld() const {
-    return old;
+    return old * OLD_AGE_Animals;
 }
 
 float Animals::getRep() const {
-    return rep;
+    return rep * REP_AGE_Animals;
 }
 
 float Animals::getVigilance() const {
@@ -140,11 +155,39 @@ void Animals::setVelocity(const Vectors &vect) {
     Animals::velocity = vect;
 }
 
-std::set<Animals *>* Animals::getPopulation() {
-    return &population;
-}
 
 void Animals::eat() {
-    satiety = 100.0;
+    satiety += saturation;
+    if (satiety > 100.0) satiety = 100.0;
+}
+
+const std::set<Animals *> &Animals::getPopulation() {
+    return population;
+}
+
+bool Animals::isDead() const {
+    return dead;
+}
+
+void Animals::brownianGo() {
+    if (velocity.length() == 0){
+        velocity = Vectors(randDouble(-1, 1), randDouble(-1, 1)).getDirection();
+    }
+    else {
+        auto x{velocity.x}, y{velocity.y};
+        float RB = 0.4;
+        velocity.x += randDouble(-RB * x, RB * x);
+        velocity.y += randDouble(-RB * y, RB * y);
+        velocity = velocity.getDirection();
+    }
+    velocity.multiply(WALK_SPEED * mobility);
+}
+
+void Animals::setSatiety(float sat) {
+    Animals::satiety = sat;
+}
+
+const Vectors &Animals::getVelocity() const {
+    return velocity;
 }
 

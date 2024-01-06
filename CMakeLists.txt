@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.11)
-project(WinBGIm)
+project(oasis)
 
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 23)
+
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 SET(GCC_COVERAGE_COMPILE_FLAGS "-m64 -fno-rtti -fno-exceptions -Wno-error  -Wwrite-strings -Wno-narrowing -fpermissive")
 # SET(GCC_COVERAGE_COMPILE_FLAGS "-m64 -Wno-narrowing ")
