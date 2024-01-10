@@ -21,6 +21,8 @@ Vectors::Vectors(Vectors const &copied){
 }
 
 void Vectors::add(const Vectors& other) {
+    if (isnanf(this->x) or isnanf(other.y) or isnanf(this->y) or isnanf(other.x))
+        auto aa = 0;
     this->x += other.x;
     this->y += other.y;
 }
@@ -65,7 +67,10 @@ double Vectors::getScalarProduct(const Vectors& other) const {
 }
 
 Vectors Vectors::getDirection() const {
-    auto len = 1 / length();
+    auto l = length();
+    if (l == 0)
+        return getMultiplied(1);
+    auto len = 1 / l;
     return getMultiplied(len);
 }
 

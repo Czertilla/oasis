@@ -12,13 +12,18 @@ class Predators: public Animals {
 private:
     static std::set<Predators*> population; // популяция только хищников
 public:
-    explicit Predators(const Vectors& position); // наследованные кострукторы
-    Predators(Animals* father, Animals* mother);
-    // уникальный для класса геттер
-    static std::set<Predators *>* getPopulation();
+    static const std::set<Vectors *> *getCoords();
 
+protected:
+    static std::set<Vectors*> coords;
+public:
+    explicit Predators(const Vectors& position); // наследованные кострукторы
+    Predators(Predators* father, Predators* mother);
+    // уникальный для класса геттер
     // наследованный метод обновления
     void update() override;
+
+    static const std::set<Predators *> &getPopulation();
 
     // наследованный метод смерти
     void death() override;

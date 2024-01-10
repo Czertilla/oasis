@@ -14,19 +14,16 @@
 #include <string>
 #include <map>
 #include "timer.h"
+#include <iostream>
 
 
 // Базовый класс Животные, для наследования другим подвидам. Описывает общие для всех
 // животных механики поведения и жизнедеятиельности
 class Animals {
 private:
-    double OLD_AGE = OLD_AGE_Animals; // отметка возраста старости в секунжах
-    double REP_AGE = REP_AGE_Animals; // отметка репродуктивного возраста в секундах
     constexpr const static float MIN_GEN = MIN_GEN_Animals; // минимальный случайный множител гена
     constexpr const static float MAX_GEN = MAX_GEN_Animals; // максимальный случайный множитель гена
     static std::set<Animals*> population; // популяция всех животных
-//    std::map<std::string, float> effects;
-    Vectors position; // позиция
     Vectors velocity; // скорость (изменение позиции в секунду)
     double lastUpdate; // время в секундах в мире моделирования, когда последний раз обновлялась инфа об особи
     double age; // возраст в секундах
@@ -41,16 +38,30 @@ private:
     float metabolism;// ген метаболизма
     bool femal;// является ли особь самкой
     bool dead;// мертва ли особь
+protected:
+    double saturation;
+//    std::map<std::string, float> effects;
+    Vectors position; // позиция
 public:
+    void setSatiety(float satiety);
+
+public:
+    double HUNGER_SPEED = HUNGER_SPEED_Animals;
+    double WALK_SPEED   = WALK_SPEED_Animals;
     explicit Animals(const Vectors& pos); // конструктор для искуственного рождения (выставление на координаты)
 //    стандартной особи)
     Animals(Animals* father, Animals* mother); // конструктор для естественного рождения (с механикой генетики)
 
     static float creategen(float fatherGen, float motherGen);
+    void brownianGo();
 
 //    далее идет ряд геттеров для приватных полей класса и объекта
-    static std::set<Animals *>* getPopulation();
     Vectors getPosition();
+
+    bool isDead() const;
+
+    static const std::set<Animals *> &getPopulation();
+
     [[nodiscard]] double getAge() const;
     [[nodiscard]] float getMobility() const;
     [[nodiscard]] float getEndurance() const;
@@ -66,6 +77,8 @@ public:
 
 //  обновление информации об особи, происходит каждую итерацию по популяции
     virtual void update();
+
+    const Vectors &getVelocity() const;
 
     void eat();
 
