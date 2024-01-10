@@ -5,6 +5,8 @@
 #ifndef WINBGIM_VISUALISE_H
 #define WINBGIM_VISUALISE_H 1
 
+#include <vector>
+
 void visualize();
 
 #endif //WINBGIM_VISUALISE_H

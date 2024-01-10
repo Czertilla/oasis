@@ -12,7 +12,7 @@ class Predators: public Animals {
 private:
     static std::set<Predators*> population; // популяция только хищников
 public:
-    static const std::set<Vectors *> &getCoords();
+    static const std::set<Vectors *> *getCoords();
 
 protected:
     static std::set<Vectors*> coords;

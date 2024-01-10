@@ -21,7 +21,7 @@ public:
 
     static const std::set<Herbivores *> &getPopulation();
 
-    static const std::set<Vectors *> &getGrass();
+    static const std::set<Vectors *> *getGrass();
 
     static void updateGrass();
 
@@ -33,7 +33,7 @@ public:
     // наследованный метод смерти
     void death() override;
 
-    static const std::set<Vectors *> &getCoords();
+    static const std::set<Vectors *> *getCoords();
 };
 
 
